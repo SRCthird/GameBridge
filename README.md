@@ -20,6 +20,7 @@ GameBridge is ideal for:
 
 ## Installation
 
+### Run as script
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/SRCthird/GameBridge.git
@@ -31,7 +32,31 @@ GameBridge is ideal for:
 
 3. **Run the Application**:
    ```bash
-   python .
+   # Update gamebridge.py
+   python gamebridge.py
+   ```
+
+### Build as package
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/SRCthird/GameBridge.git
+   cd GameBridge
+   ```
+
+2. **Install Dependencies**:
+   Ensure you have Python 3.12+ installed.
+   ```
+   pip install build
+   ```
+
+3. **Run the Application**:
+   ```bash
+   pip -m build
+   ```
+
+4. **Install the package**:
+   ```bash
+   pip install dist/GameBridge-0.1.0-py3-none-any.whl
    ```
 
 ---
@@ -46,16 +71,16 @@ To add game servers (executables), modify the `gamebridge.py` file or use the te
 server = GameBridge(port=12345)
 server.set_credentials("admin", "password")
 server.add_executable(
-    name="Minecraft Server 1",
-    exe_path="/path/to/minecraft/server1.jar",
-    args=["-Xmx2G", "-Xms2G"],
+    name="Minecraft Vanilla",
+    exe_path="/usr/bin/java",
+    args=["-Xmx2G", "-Xms2G", "-jar", "server.jar"],
     working_dir="/path/to/server1/",
     start_immediately=True
 )
 server.add_executable(
-    name="Minecraft Server 2",
-    exe_path="/path/to/minecraft/server2.jar",
-    args=["-Xmx4G", "-Xms4G"],
+    name="Minecraft Creative",
+    exe_path="/usr/bin/java",
+    args=["-Xmx2G", "-Xms2G", "-jar", "server.jar"],
     working_dir="/path/to/server2/",
     start_immediately=False
 )
@@ -75,7 +100,7 @@ Use a terminal or a custom client to connect to GameBridge:
 
 1. **Connect via Socket**:
    ```bash
-   telnet <host> <port>
+   ncat <host> <port>
    ```
 
 2. **Authenticate**:
@@ -85,7 +110,7 @@ Use a terminal or a custom client to connect to GameBridge:
    Choose an available executable to interact with.
 
 4. **Send Commands**:
-   Type commands to send to the game server (e.g., `say Hello World` for Minecraft).
+   Type commands to send to the game server (e.g., `say Hello Players!` for Minecraft).
 
 ---
 
@@ -93,26 +118,26 @@ Use a terminal or a custom client to connect to GameBridge:
 
 1. **Client Connects**:
    ```plaintext
-   $ telnet 127.0.0.1 12345
+   $ nc 127.0.0.1 12345
    ```
 2. **Authentication**:
    ```plaintext
    Username: admin
-   Password: [hidden]
+   Password: ********
    Authentication successful.
    ```
 3. **Select a Server**:
    ```plaintext
    Available executables:
-   - Minecraft Server 1
-   - Minecraft Server 2
+   - Minecraft Vanilla 
+   - Minecraft Creative
    Enter the name of the executable to attach:
-   Minecraft Server 1
+   Minecraft Vanilla 
    ```
 4. **Interact with the Server**:
    ```plaintext
    say Hello Players
-   [Minecraft Server 1 STDOUT] [Server] Hello Players
+   [Minecraft Vanilla] [Server] Hello Players
    ```
 
 ---
@@ -134,16 +159,6 @@ GameBridge is licensed under the [MIT License](LICENSE).
 
 ## Future Plans
 
-- Add support for advanced server analytics.
-- Enhance authentication with token-based systems.
-- Web-based UI for easier management.
-
----
-
-## Acknowledgments
-
-GameBridge was inspired by the need for streamlined game server management, particularly for Minecraft. Special thanks to the open-source community for their invaluable tools and resources.
-
-### Next Steps:
-1. Replace `https://github.com/yourusername/GameBridge.git` with your actual repository URL.
-2. Add a `requirements.txt` file with any dependencies (`hashlib` is part of Python’s standard library, so no extra dependencies are needed unless you add more features).
+- Add support for advanced server analytics/logging.
+- Enhance authentication.
+- Web-based UI for easier management - probably dango or something.
