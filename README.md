@@ -68,23 +68,23 @@ GameBridge is ideal for:
 To add game servers (executables), modify the `gamebridge.py` file or use the template in the `Example` section below.
 
 ```python
-server = GameBridge(port=12345)
-server.set_credentials("admin", "password")
-server.add_executable(
+gb = GameBridge(port=12345)
+gb.set_credentials("admin", "password")
+gb.add_server(
     name="Minecraft Vanilla",
     exe_path="/usr/bin/java",
     args=["-Xmx2G", "-Xms2G", "-jar", "server.jar"],
     working_dir="/path/to/server1/",
     start_immediately=True
 )
-server.add_executable(
+gb.add_server(
     name="Minecraft Creative",
     exe_path="/usr/bin/java",
     args=["-Xmx2G", "-Xms2G", "-jar", "server.jar"],
     working_dir="/path/to/server2/",
     start_immediately=False
 )
-server.start()
+gb.start()
 ```
 
 ### Authentication
