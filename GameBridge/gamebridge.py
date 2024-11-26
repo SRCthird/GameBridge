@@ -131,7 +131,7 @@ class GameBridge:
                     line = stream.readline()
                     if not line:
                         break
-                    output_line = f"[{name} {stream_name}] {line}"
+                    output_line = f"[{name}] {line}"
                     self.output_queues[name].put(output_line)
                     sys.stdout.write(output_line)
                     sys.stdout.flush()
